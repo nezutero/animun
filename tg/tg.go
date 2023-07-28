@@ -5,11 +5,15 @@ import (
 	"log"
 	"os"
 
+	"github.com/enescakir/emoji"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
 )
 
-var isBotRunning bool
+var (
+	isBotRunning  bool
+	creatorChatID int64
+)
 
 func Start() {
 	err := godotenv.Load("../.env")
@@ -46,6 +50,31 @@ func Start() {
 		),
 	)
 
+	weekdaysKeyboard := tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("monday"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("tuesday"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("wednesday"),
+		),
+
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("thursday"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("friday"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("saturday"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("sunday"),
+		),
+	)
+
 	log.Printf("[SUCCESS] authorized on account %s", bot.Self.UserName)
 
 	u := tgbotapi.NewUpdate(0)
@@ -66,13 +95,13 @@ func Start() {
 
 		switch update.Message.Command() {
 		case "start":
-      isBotRunning = true
+			isBotRunning = true
 			if isBotRunning {
 				msg.Text = "animun is already running"
 			}
-      msg.Text = "animun has been started"
-      msg.ReplyMarkup = generalKeyboard
-      isBotRunning = true
+			msg.Text = "animun has been started"
+			msg.ReplyMarkup = generalKeyboard
+			isBotRunning = true
 		case "help":
 			if isBotRunning {
 				msg.Text = "animun hints\n\n /help - to get all commands\n /start - to start animun\n /stop - to stop animun\n /schedule - to see schedule\n /support - to tell about bugs you found"
@@ -80,8 +109,8 @@ func Start() {
 			}
 		case "schedule":
 			if isBotRunning {
-        msg.Text = "schedule days of week keaboard must be here"
-				// msg.ReplyMarkup = "schedule days of week keaboard must be here"
+				msg.Text = "select day you're interest in"
+        msg.ReplyMarkup = weekdaysKeyboard // TODO: implement get data for selected day
 			}
 		case "stop":
 			if isBotRunning {
@@ -89,9 +118,35 @@ func Start() {
 				msg.ReplyMarkup = startKeyboard
 				isBotRunning = false
 			}
-    case "support":
+		case "support":
 			if isBotRunning {
-				msg.Text = "please, specify problems/bugs you found"
+				creatorChatID = 5785150199
+				msg.Text = "please describe the problem:"
+				bot.Send(msg)
+				for {
+					response := <-updates
+					if response.Message == nil {
+						continue
+					}
+					if response.Message.Chat.ID != update.Message.Chat.ID {
+						continue
+					}
+					description := response.Message.Text
+					GreenHeartEmoji := emoji.Sprintf("%v", emoji.GreenHeart)
+					msg.Text = GreenHeartEmoji + " thanks for your bug report!"
+					bot.Send(msg)
+					supportMsg := tgbotapi.NewMessage(
+						creatorChatID,
+						fmt.Sprintf(
+							" bug report from user %s:\n%s",
+							update.Message.From.UserName,
+							description,
+						),
+					)
+					bot.Send(supportMsg)
+					break
+				}
+				continue
 			}
 		default:
 			if isBotRunning {
