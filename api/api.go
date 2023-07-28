@@ -7,25 +7,23 @@ import (
 	jikan "github.com/darenliang/jikan-go"
 )
 
-func GetData() {
-	filter := jikan.ScheduleFilterMonday
+func GetData(filter jikan.ScheduleFilter) (string, error) {
 	schedules, err := jikan.GetSchedules(filter)
 	if err != nil {
-		fmt.Println("[ERROR] error getting schedules:", err)
-		return
+		return "", fmt.Errorf("error getting schedules: %v", err)
 	}
 
 	type AnimeInfo struct {
-		Title           string `json:"title"`
-		TitleEnglish    string `json:"title_english"`
-		TitleJapanese   string `json:"title_japanese"`
-		Type            string `json:"type"`
-		Episodes        int    `json:"episodes"`
-		Status          string `json:"status"`
-		Airing          bool   `json:"airing"`
-		AiredFrom       string `json:"aired_from"`
-		AiredTo         string `json:"aired_to"`
-		Score           float64 `json:"score"`
+		Title         string  `json:"title"`
+		TitleEnglish  string  `json:"title_english"`
+		TitleJapanese string  `json:"title_japanese"`
+		Type          string  `json:"type"`
+		Episodes      int     `json:"episodes"`
+		Status        string  `json:"status"`
+		Airing        bool    `json:"airing"`
+		AiredFrom     string  `json:"aired_from"`
+		AiredTo       string  `json:"aired_to"`
+		Score         float64 `json:"score"`
 	}
 
 	var animeInfos []AnimeInfo
@@ -50,8 +48,8 @@ func GetData() {
 	prettyJSON, err := json.MarshalIndent(animeInfos, "", "  ")
 	if err != nil {
 		fmt.Println("[ERROR] error formatting data:", err)
-		return
+		return "", fmt.Errorf("error formatting data: %v", err)
 	}
 
-	fmt.Println(string(prettyJSON))
+	return string(prettyJSON), nil
 }
