@@ -5,9 +5,12 @@ import (
 	"log"
 	"os"
 
+	"github.com/darenliang/jikan-go"
 	"github.com/enescakir/emoji"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/joho/godotenv"
+
+	"main.go/api"
 )
 
 var (
@@ -109,8 +112,25 @@ func Start() {
 			}
 		case "schedule":
 			if isBotRunning {
-				msg.Text = "select day you're interest in"
-        msg.ReplyMarkup = weekdaysKeyboard // TODO: implement get data for selected day
+				msg.Text = "select day you're interested in"
+				msg.ReplyMarkup = weekdaysKeyboard
+				for {
+					response := <-updates
+					if response.Message == nil {
+						continue
+					}
+					if response.Message.Chat.ID != update.Message.Chat.ID {
+						continue
+					}
+					selectedDay := response.Message.Text
+					result, err := api.GetData(jikan.ScheduleFilter(selectedDay))
+					if err != nil {
+						msg.Text = fmt.Sprintf("[ERROR] %s", err)
+					} else {
+						msg.Text = result
+					}
+					break
+				}
 			}
 		case "stop":
 			if isBotRunning {

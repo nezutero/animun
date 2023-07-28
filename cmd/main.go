@@ -1,11 +1,11 @@
 package main
 
 import (
- // "main.go/tg"
-  "main.go/api"
+ "main.go/tg"
+  // "main.go/api"
 )
 
 func main() {
-  // tg.Start()
-  api.GetData()
+  tg.Start()
+  // api.GetData()
 }
