@@ -30,26 +30,26 @@ func Start() {
 	}
 
 	bot.Debug = true
-	isBotRunning = true
+	isBotRunning = false
 
 	generalKeyboard := tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("help"),
+			tgbotapi.NewKeyboardButton("/help"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("schedule"),
+			tgbotapi.NewKeyboardButton("/schedule"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("support"),
+			tgbotapi.NewKeyboardButton("/support"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("stop"),
+			tgbotapi.NewKeyboardButton("/stop"),
 		),
 	)
 
 	startKeyboard := tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("start"),
+			tgbotapi.NewKeyboardButton("/start"),
 		),
 	)
 
@@ -69,12 +69,6 @@ func Start() {
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("friday"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("saturday"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("sunday"),
 		),
 	)
 
@@ -99,21 +93,24 @@ func Start() {
 		switch update.Message.Command() {
 		case "start":
 			isBotRunning = true
+			okEmoji := emoji.Sprintf("%v", emoji.GreenCircle)
 			if isBotRunning {
-				msg.Text = "animun is already running"
+				msg.Text = okEmoji + " animun is already running"
 			}
-			msg.Text = "animun has been started"
+			msg.Text = okEmoji + " animun has been started"
 			msg.ReplyMarkup = generalKeyboard
-			isBotRunning = true
 		case "help":
 			if isBotRunning {
-				msg.Text = "animun hints\n\n /help - to get all commands\n /start - to start animun\n /stop - to stop animun\n /schedule - to see schedule\n /support - to tell about bugs you found"
+				infoEmoji := emoji.Sprintf("%v", emoji.Information)
+				msg.Text = infoEmoji + " animun hints\n\n /help - to get all commands\n /start - to start animun\n /stop - to stop animun\n /schedule - to see schedule\n /support - to tell about bugs you found"
 				msg.ReplyMarkup = generalKeyboard
 			}
 		case "schedule":
 			if isBotRunning {
-				msg.Text = "select day you're interested in"
 				msg.ReplyMarkup = weekdaysKeyboard
+				infinityEmoji := emoji.Sprintf("%v", emoji.Infinity)
+				msg.Text = infinityEmoji + " select day you're interested in"
+				bot.Send(msg)
 				for {
 					response := <-updates
 					if response.Message == nil {
@@ -129,19 +126,23 @@ func Start() {
 					} else {
 						msg.Text = result
 					}
+					msg.ReplyMarkup = generalKeyboard
 					break
 				}
 			}
 		case "stop":
 			if isBotRunning {
-				msg.Text = "animun has been stopped"
+				stopEmoji := emoji.Sprintf("%v", emoji.RedCircle)
+				msg.Text = stopEmoji + " animun has been stopped"
 				msg.ReplyMarkup = startKeyboard
 				isBotRunning = false
 			}
+			isBotRunning = false
 		case "support":
 			if isBotRunning {
+				cactusEmoji := emoji.Sprintf("%v", emoji.Cactus)
 				creatorChatID = 5785150199
-				msg.Text = "please describe the problem:"
+				msg.Text = cactusEmoji + " please describe the problem:"
 				bot.Send(msg)
 				for {
 					response := <-updates
@@ -168,15 +169,16 @@ func Start() {
 				}
 				continue
 			}
+			isBotRunning = false
+
 		default:
 			if isBotRunning {
-				msg.Text = "i don't understand you\n/help"
+				idkEmoji := emoji.Sprintf("%v", emoji.OpenHands)
+				msg.Text = idkEmoji + " i don't understand you\n/help"
 			}
 		}
 		if _, err := bot.Send(msg); err != nil {
-			log.Panic(err)
 			fmt.Printf("[ERROR] error sending message")
-			log.Panic(err)
 		}
 	}
 }
