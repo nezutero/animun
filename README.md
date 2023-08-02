@@ -78,19 +78,14 @@ ENV TELEGRAM_API_TOKEN=YOUR_API_TOKEN
 docker build -t your_image_name .
 docker run -d -p 8080:80 your_image_name
 ```
-### you can also pull my image from dockerhub ->
-```
-docker pull shikigayomi/animun:latest
-docker run -e TELEGRAM_API_TOKEN=YOUR_API_TOKEN shikigayomi/animun:latest
-```
-## Contributing
+## contributing
 
 - Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
 - Please make sure to update tests as appropriate.
 
-## License
+## license
 
 - [MIT](https://choosealicense.com/licenses/mit/)
 
