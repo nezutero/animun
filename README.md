@@ -27,7 +27,7 @@
 use git clone:
 
 ```
-git clone https://github.com/amodotomi/animun
+git clone https://github.com/kenjitheman/animun
 ```
 
 ## usage
