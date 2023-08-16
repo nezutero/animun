@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:alpine
 WORKDIR /app
 ENV TELEGRAM_API_TOKEN=YOUR_API_TOKEN
 COPY go.mod go.sum ./

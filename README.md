@@ -1,41 +1,35 @@
-<h2 align="left">telegram bot for self use, was done because I want to track anime release schedule</h2>
+<h3 align="center">tg bot for self use, was created coz I want to track anime release schedule</h3>
 
 ###
 
-<img align="right" height="200" src="https://media.tenor.com/6OCEdkhjHKUAAAAC/d4dj-first-mix-d4dj.gif"  />
-
-###
-
-<div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" height="200" alt="go logo"  />
-  <img width="" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="200" alt="docker logo"  />
-</div>
+<img align="right" height="200" src="https://media.tenor.com/6VJldkd3beMAAAAC/kaori-miyazono-kousei-arima.gif"  />
 
 ###
 
 <div align="center">
-  <a href="https://t.me/animun_bot" target="_blank">
-    <img src="https://img.shields.io/static/v1?message=ANIMUN&logo=telegram&label=&color=2CA5E0&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="telegram logo"  />
-  </a>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" height="200" alt="go logo"  />
+  <img width="15" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="200" alt="docker logo"  />
 </div>
 
 ###
 
 ## installation
 
-use git clone:
-
 ```
 git clone https://github.com/kenjitheman/animun
 ```
 
 ## usage
+
 - create .env file and inside you should create env variable with your api key ->
+
 ```
 TELEGRAM_API_TOKEN=YOUR_TOKEN
 ```
+
 - then you should uncomment commented lines in tg/tg.go ( ! you need uncomment commented lines only if you using this way !) ->
+
 ```
 package tg
 
@@ -68,22 +62,26 @@ func Start() {
 		log.Panic(err)
 	}
 ```
-### you can also run it using docker ->
-- you need to paste your api key in dockerfile ->
+
+#### you can also run it using docker:
+
+- you need to paste your api key in dockerfile:
+
 ```
 ENV TELEGRAM_API_TOKEN=YOUR_API_TOKEN
 ```
-- then run it ->
+
+- run it:
+
 ```
 docker build -t your_image_name .
 docker run -d -p 8080:80 your_image_name
 ```
+
 ## contributing
 
-- Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-- Please make sure to update tests as appropriate.
+- pull requests are welcome, for major changes, please open an issue first
+to discuss what you would like to change
 
 ## license
 
