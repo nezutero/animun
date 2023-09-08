@@ -110,7 +110,6 @@ func Start() {
 				msg.ReplyMarkup = weekdaysKeyboard
 				infinityEmoji := emoji.Sprintf("%v", emoji.Infinity)
 				msg.Text = infinityEmoji + " select day you're interested in"
-				bot.Send(msg)
 				for {
 					response := <-updates
 					if response.Message == nil {
