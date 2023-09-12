@@ -102,7 +102,7 @@ func Start() {
 		case "help":
 			if isBotRunning {
 				infoEmoji := emoji.Sprintf("%v", emoji.Information)
-				msg.Text = infoEmoji + " animun hints\n\n /help - to get all commands\n /start - to start animun\n /stop - to stop animun\n /schedule - to see schedule\n /support - to tell about bugs you found"
+				msg.Text = infoEmoji + " animun hints\n\n+ /help - to get all commands\n+ /start - to start animun\n+ /stop - to stop animun\n+ /schedule - to see schedule\n+ /support - to tell about bugs you found"
 				msg.ReplyMarkup = generalKeyboard
 			}
 		case "schedule":
