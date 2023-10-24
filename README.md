@@ -14,6 +14,25 @@
 
 ###
 
+## project structure
+
+```go
+.
+├── api
+│   ├── api.go
+│   └── api_test.go
+├── bot
+│   ├── bot.go
+│   ├── keyboards.go
+│   └── vars.go
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── LICENSE
+├── main.go
+└── README.md
+```
+
 ## installation
 
 ```shell
