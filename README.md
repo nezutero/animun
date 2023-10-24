@@ -47,8 +47,7 @@ git clone https://github.com/kenjitheman/animun
 TELEGRAM_API_TOKEN=YOUR_TOKEN
 ```
 
-- then you should uncomment these lines in bot.go 
-    - **( ! you need uncomment commented lines only if you using this way !)**
+- you need to uncomment these lines in bot.go if you are going to run it using go run or go build
 
 ```go
 // "github.com/joho/godotenv"
@@ -60,6 +59,22 @@ TELEGRAM_API_TOKEN=YOUR_TOKEN
 // 	fmt.Println("[ERROR] error loading .env file")
 // 	log.Panic(err)
 // }
+```
+
+- to run it
+
+```sh
+go run main.go
+```
+
+- or build and run
+
+```sh
+go build
+```
+
+```sh
+./animun
 ```
 
 #### run it using docker:
