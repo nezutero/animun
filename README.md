@@ -1,4 +1,4 @@
-<h3 align="center">tg bot for self use, was created coz I want to track anime release schedule</h3>
+<h3 align="center">Tg bot for self use, was created coz I want to track anime release schedule</h3>
 
 ###
 
@@ -14,10 +14,11 @@
 
 ###
 
-## project structure
+## Project structure
 
 ```go
-.
+animun
+│
 ├── api
 │   ├── api.go
 │   └── api_test.go
@@ -33,21 +34,21 @@
 └── README.md
 ```
 
-## installation
+## Installation
 
-```shell
+```sh
 git clone https://github.com/kenjitheman/animun
 ```
 
-## usage
+## Usage
 
-- create .env file and inside you should create env variable with your api key
+- Create .env file and inside you should create env variable with your api key:
 
 ```.env
 TELEGRAM_API_TOKEN=YOUR_TOKEN
 ```
 
-- you need to uncomment these lines in bot.go if you are going to run it using go run or go build
+- You need to uncomment these lines in bot.go if you are going to run it using go run or go build:
 
 ```go
 // "github.com/joho/godotenv"
@@ -61,13 +62,13 @@ TELEGRAM_API_TOKEN=YOUR_TOKEN
 // }
 ```
 
-- to run it
+- To run it:
 
 ```sh
 go run main.go
 ```
 
-- or build and run
+- Or build and run:
 
 ```sh
 go build
@@ -77,28 +78,28 @@ go build
 ./animun
 ```
 
-#### run it using docker:
+#### Run it using Docker:
 
-- you need to paste your api key in dockerfile:
+- You need to paste your api key in dockerfile:
 
 ```dockerfile
 ENV TELEGRAM_API_TOKEN=YOUR_API_TOKEN
 ```
 
-- run it:
+- Run it:
 
 ```sh
 docker build -t your_image_name .
 docker run -d -p 8080:80 your_image_name
 ```
 
-## contributing
+## Contributing
 
-- pull requests are welcome, for major changes, please open an issue first
-to discuss what you would like to change
+- Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
 
-- please make sure to update tests as appropriate
+- Please make sure to update tests as appropriate.
 
-## license
+## License
 
-- [MIT](https://choosealicense.com/licenses/mit/)
+- [MIT](./LICENSE)
