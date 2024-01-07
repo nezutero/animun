@@ -37,7 +37,7 @@ animun
 ## Installation
 
 ```sh
-git clone https://github.com/kenjitheman/animun
+git clone https://github.com/btwkenji/animun
 ```
 
 ## Usage
