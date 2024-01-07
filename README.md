@@ -14,30 +14,10 @@
 
 ###
 
-## Project structure
-
-```go
-animun
-│
-├── api
-│   ├── api.go
-│   └── api_test.go
-├── bot
-│   ├── bot.go
-│   ├── keyboards.go
-│   └── vars.go
-├── Dockerfile
-├── go.mod
-├── go.sum
-├── LICENSE
-├── main.go
-└── README.md
-```
-
 ## Installation
 
 ```sh
-git clone https://github.com/btwkenji/animun
+git clone https://github.com/kenjitheman/animun
 ```
 
 ## Usage

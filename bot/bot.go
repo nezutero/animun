@@ -2,9 +2,9 @@ package bot
 
 import (
 	"fmt"
+	"github.com/btwkenji/animun/api"
 	"github.com/darenliang/jikan-go"
 	"github.com/joho/godotenv"
-	"github.com/kenjitheman/animun/api"
 	"log"
 	"os"
 	"time"
@@ -171,4 +171,3 @@ func Start() {
 		autoOff.Stop()
 	}
 }
-

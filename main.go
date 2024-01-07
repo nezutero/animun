@@ -1,7 +1,7 @@
 package main
 
 import (
-    "github.com/kenjitheman/animun/bot"
+    "github.com/btwkenji/animun/bot"
 )
 
 func main() {
