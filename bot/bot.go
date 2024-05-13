@@ -2,7 +2,7 @@ package bot
 
 import (
 	"fmt"
-	"github.com/btwkenji/animun/api"
+	"github.com/nezutero/animun/api"
 	"github.com/darenliang/jikan-go"
 	"github.com/joho/godotenv"
 	"log"

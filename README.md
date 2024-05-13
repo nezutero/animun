@@ -17,7 +17,7 @@
 ## Installation
 
 ```sh
-git clone https://github.com/kenjitheman/animun
+git clone https://github.com/nezutero/animun
 ```
 
 ## Usage
